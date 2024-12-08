@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #670000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .result-container {
+            text-align: center;
+            background-color: #000000;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(163, 0, 0, 0.642);
+            width: 80%;
+            max-width: 1000px;
+            transition: transform 0.3s ease; 
+        }
+        .result-container:hover{
+            transform: scale(1.015);
+        }
+        h1 {
+            color: white;
+            font-family: "Archivo Black", sans-serif;
+            margin-bottom: 60px;
+        }
+        .result {
+            font-family: "Archivo Black", sans-serif;
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 60px;
+        }
+        .normal {
+            color: green;
+        }
+        .fraud {
+            color: red;
+        }
+        a {
+            background-color: #720000;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease; 
+            display: inline-block;
+            align-items: center;
+            margin-right: 40px; 
+        }
+        .button:last-child {
+            margin-right: 0; 
+        }
+        a:hover {
+            transform: scale(1.2);
+            background-color: #670000;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="result-container">
+        <h1>Transaction Detection Result</h1>
+        <p class="result {{ 'fraud' if fraud == 'Yes' else 'normal' }}">
+            {{ 'Fraudulent Transaction' if fraud == 'Yes' else 'Normal Transaction' }}
+        </p>
+
+        <a href="/">Home</a><a href="/history">History</a>
+    </div>
+</body>
+</html>

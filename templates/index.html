@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Credit Card Fraud Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #670000;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .welcome-container {
+            text-align: center;
+            background-color: #000000;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(163, 0, 0, 0.642);
+            transition: transform 0.3s ease; 
+        }
+        .welcome-container:hover{
+            transform: scale(1.2);
+        }
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-family: "Archivo Black", serif;
+        }
+        p {
+            color: white;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .start-button {
+            background-color: #720000;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease; 
+            display: inline-block;
+        }
+        .start-button:hover {
+            transform: scale(1.2);
+            background-color: #670000;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Welcome to Credit Card Fraud Detection</h1>
+        <p>Your tool for identifying fraudulent transactions efficiently and securely.</p>
+        <a href="/form" class="start-button">Check Transaction</a>
+    </div>
+</body>
+</html>
