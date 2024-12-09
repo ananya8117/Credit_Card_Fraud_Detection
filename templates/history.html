@@ -3,51 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>History</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #670000;
-            padding: 30px;
-            color: white;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(90deg, #bf0000, #7c0000);
             margin: 0;
-            height: 100vh;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
         }
         h1 {
-            text-align: center;
-            color: white;
-            font-family: "Archivo Black", sans-serif;
-            margin-bottom: 20px;
+            font-family: 'Archivo Black', sans-serif;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
             font-size: 40px;
+            text-align: center;
         }
+        
         table {
-            width: 100%;
+            width: 90%;
             border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #000000;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
         }
         th, td {
             padding: 15px;
-            border: 1px solid #ffffff;
             text-align: left;
-            color:#ffffff
+            border-bottom: 1px solid #670000;
         }
         th {
-            background-color: #000000;
-            color: #ffffff; 
+            background: #000000;
             font-weight: bold;
+            color: #ffffff;
+        }
+        td {
+            background: #000000;
         }
         .prediction-column {
             text-align: center;
+            font-weight: bold;
         }
+        .prediction-column {
+            color: white;
+        }
+        .prediction-column:contains("Fraudulent") {
+            color: #FF4500;
+        }
+        .prediction-column:contains("Normal") {
+            color: #32CD32;
+        }
+        .button-container {
+            width: 100%;
+            text-align: left;
+            padding: 10px 30px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        h1 {
+            font-family: "Archivo Black", sans-serif;
+            margin: 0 auto;
+            font-size: 40px;
+            text-align: center;
+        }
+        .home-button {
+            position: absolute;
+            left: 50px;
+            top: 25%;
+            background-color: #000000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .home-button:hover {
+            transform: scale(1.1);
+        }
+        /* a {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #000000;
+            color: #ffffff;
+            font-size: 1em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(77, 0, 0, 0.8);
+        } */
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>History</h1>
+    <div class="header">
+        <a href="{{ url_for('home') }}" class="home-button">Home</a>
+        <h1>Transaction History</h1>
+    </div>
     <table>
         <thead>
             <tr>
@@ -80,26 +153,3 @@
     </table>
 </body>
 </html>
-
-<!-- <tr>
-    <td>John Doe</td>
-    <td>john@example.com</td>
-    <td>1234567890</td>
-    <td>123 Main St</td>
-    <td>1234 5678 9876 5432</td>
-    <td>John Doe</td>
-    <td>12/24</td>
-    <td>123</td>
-    <td class="prediction-column">Fraudulent</td>
-</tr>
-<tr>
-    <td>Jane Smith</td>
-    <td>jane@example.com</td>
-    <td>9876543210</td>
-    <td>456 Elm St</td>
-    <td>4321 8765 1234 6789</td>
-    <td>Jane Smith</td>
-    <td>11/23</td>
-    <td>456</td>
-    <td class="prediction-column">Normal</td>
-</tr> -->

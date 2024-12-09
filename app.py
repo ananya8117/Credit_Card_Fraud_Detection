@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 from flask_mysqldb import MySQL
+import pandas as pd
+import numpy as np
+import joblib
 
 app = Flask(__name__)
+
+model = joblib.load('fraud_detection.pkl')
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -43,7 +48,7 @@ def form():
             card_expiry = request.form.get('card_expiry')
             cvv = request.form.get('cvv')
 
-            fraud_result = detect_fraud(filepath)
+            fraud_result = detect_fraud(filepath, model)
 
             cursor = mysql.connection.cursor()
             query = """INSERT INTO History (full_name, email, phone, address, card_number, card_holder, card_expiry, cvv, prediction) 
@@ -68,8 +73,46 @@ def history():
 
     return render_template('history.html', transactions=transactions)
 
-def detect_fraud(file_path):
-    return "Yes"
+def detect_fraud(file_path, model):
+    try:
+        # Load dataset
+        data = pd.read_csv(file_path)
+
+        # Clean column names
+        data.columns = data.columns.str.strip()  # Remove leading/trailing spaces
+
+        # Check number of columns and trim if necessary
+        if data.shape[1] > 31:
+            data = data.iloc[:, :31]  # Keep only the first 29 columns
+
+        print("Columns after cleaning:", data.columns.tolist())
+
+        # Ensure 'Class' is present
+        if 'Class' not in data.columns:
+            return "Target column 'Class' not found."
+
+        # Select feature columns (V1 to V28) and ensure they are numeric
+        features = data.drop(columns=['Class'])
+
+        # Ensure all features are numeric
+        features = features.apply(pd.to_numeric, errors='coerce').dropna()
+
+        if features.shape[1] != 30:
+            return f"Expected 28 numeric feature columns, but found {features.shape[1]}."
+
+        # Check if 'Time' is included in the features
+        if 'Time' not in features.columns:
+            return "Feature 'Time' is missing from input data."
+
+        # Model prediction
+        predictions = model.predict(features)
+        fraud_count = np.sum(predictions)
+
+    except Exception as e:
+        return f"Error during processing: {e}"
+
+    return "Fraud" if fraud_count > 0 else "Valid"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
