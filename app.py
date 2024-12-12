@@ -75,36 +75,23 @@ def history():
 
 def detect_fraud(file_path, model):
     try:
-        # Load dataset
         data = pd.read_csv(file_path)
-
-        # Clean column names
-        data.columns = data.columns.str.strip()  # Remove leading/trailing spaces
-
-        # Check number of columns and trim if necessary
+        data.columns = data.columns.str.strip() 
         if data.shape[1] > 31:
-            data = data.iloc[:, :31]  # Keep only the first 29 columns
+            data = data.iloc[:, :31]  
 
         print("Columns after cleaning:", data.columns.tolist())
-
-        # Ensure 'Class' is present
         if 'Class' not in data.columns:
             return "Target column 'Class' not found."
-
-        # Select feature columns (V1 to V28) and ensure they are numeric
         features = data.drop(columns=['Class'])
-
-        # Ensure all features are numeric
         features = features.apply(pd.to_numeric, errors='coerce').dropna()
 
         if features.shape[1] != 30:
             return f"Expected 28 numeric feature columns, but found {features.shape[1]}."
 
-        # Check if 'Time' is included in the features
         if 'Time' not in features.columns:
             return "Feature 'Time' is missing from input data."
 
-        # Model prediction
         predictions = model.predict(features)
         fraud_count = np.sum(predictions)
 
